@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+p{
+color:blue;
+font-size:18px;
+}
+body
+{
+background-image: url("IMAGE/car.jpg");
+background-size: cover;
+background-repeat: no repeat;
+}
+</style>
+<title>PURITY NYAMBURA</title>
+</head>
+<body>
+<div>
+<p></p>
+</div>
+</body>
+</html>
