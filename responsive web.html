@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Tribute Page</title>
+    <style>
+        /* styles.css */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+
+        header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        h1 {
+            margin: 0;
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        section {
+            padding: 20px;
+            margin: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        textarea {
+            width: 100%;
+            height: 100px;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        #image-gallery {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        #image-gallery img {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        audio {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Welcome to the Tribute Page</h1>
+        <p>Share your memories, photos, and messages for a loved one.</p>
+    </header>
+
+    <section id="music-player">
+        <h2>Background Music</h2>
+        <audio controls autoplay>
+            <source src="instrumental-music.mp3" type="audio/mp3">
+            Your browser does not support the audio element.
+        </audio>
+    </section>
+
+    <section id="message-form">
+        <h2>Post a Message</h2>
+        <form id="messageForm">
+            <textarea id="messageInput" placeholder="Write your message here..."></textarea>
+            <button type="submit">Post Message</button>
+        </form>
+        <div id="messageList"></div>
+    </section>
+
+    <section id="image-gallery">
+        <h2>Upload a Photo</h2>
+        <form id="imageUploadForm">
+            <input type="file" id="imageInput" accept="image/*">
+            <button type="submit">Upload Photo</button>
+        </form>
+        <div id="gallery"></div>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Your Website Name</p>
+    </footer>
+
+    <script>
+        // script.js
+
+        // Handling message submission
+        const messageForm = document.getElementById('messageForm');
+        const messageInput = document.getElementById('messageInput');
+        const messageList = document.getElementById('messageList');
+
+        // Handling image upload
+        const imageUploadForm = document.getElementById('imageUploadForm');
+        const imageInput = document.getElementById('imageInput');
+        const gallery = document.getElementById('gallery');
+
+        // Function to add messages to the page
+        messageForm.addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const messageText = messageInput.value;
+            if (messageText.trim() !== '') {
+                const messageDiv = document.createElement('div');
+                messageDiv.classList.add('message');
+                messageDiv.innerHTML = `<p>${messageText}</p>`;
+                messageList.appendChild(messageDiv);
+
+                // Clear the input field after submission
+                messageInput.value = '';
+            }
+        });
+
+        // Function to handle image uploads
+        imageUploadForm.addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const file = imageInput.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function (event) {
+                    const img = document.createElement('img');
+                    img.src = event.target.result;
+                    gallery.appendChild(img);
+                };
+                reader.readAsDataURL(file);
+
+                // Clear the file input after upload
+                imageInput.value = '';
+            }
+        });
+    </script>
+</body>
+</html>
